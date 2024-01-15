@@ -1,19 +1,15 @@
 import { Router } from "express";
-
-// todo* > importar controller
 import { UserController } from "../controllers";
-
 import { AuthorizationService } from "../services";
 
 const routes = Router();
 
-// todo* > instanciar controller
 const userController = new UserController();
-const authorizationService = new AuthorizationService();
+const auth = new AuthorizationService();
 
 routes.get(
   "/",
-  authorizationService.authenticateToken.bind(authorizationService),
+  [auth.checkRole.bind(auth), auth.authenticateToken.bind(auth)],
   userController.getAll.bind(userController)
 );
 routes.post("/signup", userController.signUp.bind(userController));

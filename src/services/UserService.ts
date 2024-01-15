@@ -32,10 +32,18 @@ export class UserService {
     return users;
   }
 
-  public async getUserByEmail(email: any): Promise<IUser> {
+  public async getByEmail(email: any): Promise<IUser> {
     const user: IUser[] | any = await this.dataSource
       .getRepository(User)
       .findOne({ where: { email: email } });
+
+    return user;
+  }
+
+  public async getById(id: string): Promise<IUser> {
+    const user: IUser | any = await this.dataSource
+      .getRepository(User)
+      .findOne({ where: { id: id } });
 
     return user;
   }

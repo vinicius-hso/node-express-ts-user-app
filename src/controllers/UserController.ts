@@ -38,7 +38,7 @@ export class UserController {
         .json({ message: "Bad request: emil required!" });
 
     // * verificar se o usário já existe...
-    const existindUser = await this.userService.getUserByEmail(user.email);
+    const existindUser = await this.userService.getByEmail(user.email);
 
     if (existindUser) {
       return response
@@ -73,7 +73,7 @@ export class UserController {
     }
 
     // * buscar usuário por email
-    const loggedUser = await this.userService.getUserByEmail(user.email);
+    const loggedUser = await this.userService.getByEmail(user.email);
 
     if (!loggedUser) {
       return response
